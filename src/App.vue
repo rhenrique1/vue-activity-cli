@@ -4,7 +4,6 @@
       <div class="container">
         <div class="navbar-brand">
           <h1>{{ fullAppName }}</h1>
-          <!-- <h1>{{ watchedAppName }}</h1> -->
         </div>
       </div>
     </nav>
@@ -19,75 +18,19 @@
             <a
               class="navbar-item"
               href="#"
-            >In </a>
+            >In Progress</a>
             <a
               class="navbar-item"
               href="#"
             >Finished</a>
           </div>
-        </div>Progress
+        </div>
       </div>
     </nav>
     <section class="container">
       <div class="columns">
         <div class="column is-3">
-          <a
-            v-if="!isFormDisplayed"
-            class="button is-primary is-block is-alt is-large"
-            href="#"
-            @click="toggleFormDisplay()"
-          >New Activity</a>
-          <div
-            v-if="isFormDisplayed"
-            class="create-form"
-          >
-            <h2>Create Activity</h2>
-            <form>
-              <div class="field">
-                <label class="label">Title</label>
-                <div class="control">
-                  <input
-                    v-model="newActivity.title"
-                    class="input"
-                    type="text"
-                    placeholder="Read a Book"
-                  >
-                </div>
-              </div>
-              <div class="field">
-                <label
-                  class="label"
-                >Notes</label>
-                <div class="control">
-                  <select v-model="newActivity.category" class="select">
-                    <option disabled value="">Please Select One</option>
-                    <option v-for="category in categories" :key="category.id">
-                      {{ category.text }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-              <div class="field is-grouped">
-                <div class="control">
-                  <button
-                    class="button is-link"
-                    :disabled="!isFormValid"
-                    @click="createActivity"
-                  >
-                    Create Activity
-                  </button>
-                </div>
-                <div
-                  class="control"
-                  @click="toggleFormDisplay()"
-                >
-                  <button class="button is-text">
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+          <ActivityCreate :categories="categories"/>
         </div>
         <div class="column is-9">
           <div class="box content">
@@ -107,21 +50,16 @@
 
 <script>
 import ActivityItem from './components/ActivityItem';
+import ActivityCreate from './components/ActivityCreate';
 import { fetchActivities, fetchUser, fetchCategories } from '@/api'
 export default {
   name: "App",
-  components: {ActivityItem},
+  components: {ActivityItem, ActivityCreate},
   data () {
     return {
-      isFormDisplayed: false,
       creator: 'Roberto Henrique',
       appName: 'Activity Planner',
       watchedAppName: 'Activity Planner by Filip Jerga',
-      newActivity: {
-        title: '',
-        notes: '',
-        category: '',
-      },
       items: {
           1: { name: 'Filip'},
           2: { name: 'John'}
@@ -132,9 +70,7 @@ export default {
     }
   },
   computed: {
-    isFormValid() {
-      return (this.newActivity.title && this.newActivity.notes);
-    },
+
     fullAppName() {
       return `${this.appName} by ${this.creator}`;
     },
@@ -159,15 +95,9 @@ export default {
     this.categories = fetchCategories();
   },
   methods: {
-    toggleFormDisplay() {
-      this.isFormDisplayed = !this.isFormDisplayed;
-    },
     createActivity() {
       console.log(this.newActivity);
     },
-    // isFormValid() {
-    //   return (this.newActivity.title && this.newActivity.notes);
-    // }
   }
 };
 </script>
