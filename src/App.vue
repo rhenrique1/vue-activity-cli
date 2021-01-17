@@ -3,7 +3,8 @@
     <nav class="navbar is-white topNav">
       <div class="container">
         <div class="navbar-brand">
-          <h1>Activity Planner</h1>
+          <h1>{{ fullAppName }}</h1>
+          <!-- <h1>{{ watchedAppName }}</h1> -->
         </div>
       </div>
     </nav>
@@ -110,9 +111,9 @@ export default {
   data () {
     return {
       isFormDisplayed: false,
-      message: 'Hello Vue!',
-      titleMessage: 'Title Message Vue!!!!!',
-      isTextDisplayed: true,
+      creator: 'Roberto Henrique',
+      appName: 'Activity Planner',
+      watchedAppName: 'Activity Planner by Filip Jerga',
       newActivity: {
         title: '',
         notes: '',
@@ -129,10 +130,20 @@ export default {
   computed: {
     isFormValid() {
       return (this.newActivity.title && this.newActivity.notes);
+    },
+    fullAppName() {
+      return `${this.appName} by ${this.creator}`;
     }
   },
+  // watch: {
+  //   creator(val) {
+  //     this.watchedAppName = `${this.appName} by ${val}`;
+  //   },
+  //   appName(val) {
+  //     this.watchedAppName =  `${val} by ${this.creator}`;
+  //   }
+  // },
   beforeCreate() {
-    console.log('beforeCreate called!');
   },
   created() {
     this.activities = fetchActivities();
@@ -140,9 +151,6 @@ export default {
     this.categories = fetchCategories();
   },
   methods: {
-    toggleTextDisplay() {
-      this.isTextDisplayed = !this.isTextDisplayed;
-    },
     toggleFormDisplay() {
       this.isFormDisplayed = !this.isFormDisplayed;
     },
