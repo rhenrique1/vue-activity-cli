@@ -59,11 +59,12 @@
                   class="label"
                 >Notes</label>
                 <div class="control">
-                  <textarea
-                    v-model="newActivity.notes"
-                    class="textarea"
-                    placeholder="Write some notes here"
-                  />
+                  <select v-model="newActivity.category" class="select">
+                    <option disabled value="">Please Select One</option>
+                    <option v-for="category in categories" :key="category.id">
+                      {{ category.text }}
+                    </option>
+                  </select>
                 </div>
               </div>
               <div class="field is-grouped">
@@ -119,6 +120,7 @@ export default {
       newActivity: {
         title: '',
         notes: '',
+        category: '',
       },
       items: {
           1: { name: 'Filip'},
