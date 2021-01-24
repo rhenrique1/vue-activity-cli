@@ -7,15 +7,16 @@
         </div>
       </div>
     </nav>
-    <TheNavbar/>
+    <TheNavbar />
     <section class="container">
       <div class="columns">
         <div class="column is-3">
-          <ActivityCreate :categories="categories" @activityCreated="addActivity"/>
+          <ActivityCreate :categories="categories" @activityCreated="addActivity" />
         </div>
         <div class="column is-9">
           <div class="box content"
-            :class="{fetching: isFetching, 'has-error': error}">
+            :class="{fetching: isFetching, 'has-error': error}"
+            >
             <div v-if="error">
               {{ error }}
             </div>
@@ -27,6 +28,7 @@
                 v-for="activity in activities" 
                 :key="activity.id"
                 :activity="activity"
+                :categories="categories"
               />
             </div>
             <div v-if="!isFetching">
