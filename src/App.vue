@@ -30,7 +30,7 @@
     <section class="container">
       <div class="columns">
         <div class="column is-3">
-          <ActivityCreate :categories="categories"/>
+          <ActivityCreate :categories="categories" @activityCreated="addActivity"/>
         </div>
         <div class="column is-9">
           <div class="box content">
@@ -87,16 +87,14 @@ export default {
       }
     },
   },
-  beforeCreate() {
-  },
   created() {
     this.activities = fetchActivities();
     this.user = fetchUser();
     this.categories = fetchCategories();
   },
   methods: {
-    createActivity() {
-      console.log(this.newActivity);
+    addActivity(newActivity) {
+      console.log(newActivity);
     },
   }
 };
