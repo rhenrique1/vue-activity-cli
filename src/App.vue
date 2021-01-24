@@ -92,6 +92,9 @@ export default {
     fetchActivities()
       .then(activities => {
         this.activities = activities;
+      })
+      .catch(err => {
+        console.log(err)
       });
     
     this.user = fetchUser();

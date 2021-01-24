@@ -95,9 +95,16 @@
             toggleFormDisplay() {
                 this.isFormDisplayed = !this.isFormDisplayed;
             },
+            resetActivitiy() {
+                this.newActivity.title = '';
+                this.newActivity.notes = '';
+                this.newActivity.category = '';
+            },
             createActivity() {
-                createActivityAPI(this.newActivity)
+                createActivityAPI({...this.newActivity})
                     .then(activity => {
+                        this.resetActivitiy();
+                        this.isFormDisplayed = false;
                         this.$emit('activityCreated', {...activity});
                     });
             }
