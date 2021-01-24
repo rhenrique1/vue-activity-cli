@@ -89,15 +89,17 @@ export default {
     },
   },
   created() {
-    this.activities = fetchActivities();
+    fetchActivities()
+      .then(activities => {
+        this.activities = activities;
+      });
+    
     this.user = fetchUser();
     this.categories = fetchCategories();
   },
   methods: {
     addActivity(newActivity) {
       this.activities[newActivity.id] = newActivity;
-      // Vue.$set(this.activities, newActivity.id, newActivity);
-      console.log(newActivity);
     },
   }
 };
