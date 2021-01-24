@@ -68,7 +68,7 @@
     </div>
 </template>
 <script>
-    import { createActivity } from '@/api/index.js'
+    import { createActivityAPI } from '@/api/index.js'
     export default {
         props: {
             categories: {
@@ -96,8 +96,10 @@
                 this.isFormDisplayed = !this.isFormDisplayed;
             },
             createActivity() {
-                const activity = createActivity(this.newActivity);
-                this.$emit('activityCreated', {...activity});
+                createActivityAPI(this.newActivity)
+                    .then(activity => {
+                        this.$emit('activityCreated', {...activity});
+                    });
             }
         }
     }
