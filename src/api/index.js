@@ -12,7 +12,7 @@ const activities = {
         id: '1546969212',
         title: 'Read Witcher Books',
         notes: 'These books are super nice',
-        progress: 0,
+        progress: 75,
         category: '1546969049',
         createdAt: 1546969144391,
         updatedAt: 1546969144391
@@ -37,7 +37,7 @@ export const fetchActivities = () => {
             else {
                 reject('Cannot fetch activities');
             }
-        }, 2000);
+        }, 1000);
     });
 }
 const generateUid = () => Math.floor(new Date() * Math.random());
