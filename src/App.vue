@@ -49,9 +49,10 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import ActivityItem from './components/ActivityItem';
 import ActivityCreate from './components/ActivityCreate';
-import { fetchActivities, fetchUser, fetchCategories } from '@/api'
+import { fetchActivities, fetchUser, fetchCategories } from '@/api';
 export default {
   name: "App",
   components: {ActivityItem, ActivityCreate},
@@ -94,6 +95,8 @@ export default {
   },
   methods: {
     addActivity(newActivity) {
+      this.activities[newActivity.id] = newActivity;
+      // Vue.$set(this.activities, newActivity.id, newActivity);
       console.log(newActivity);
     },
   }
